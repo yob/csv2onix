@@ -14,7 +14,12 @@ Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here
 
   # Skip frameworks you're not going to use (only works if using vendor/rails)
-  config.frameworks -= [ :active_resource, :action_mailer, :active_record ]
+  # ActiveRecord is required in testing, as it loads fixture testing code
+  if ENV["RAILS_ENV"] == "test"
+    config.frameworks -= [ :active_resource, :action_mailer]
+  else
+    config.frameworks -= [ :active_resource, :action_mailer, :active_record ]
+  end
 
   # Only load the plugins named here, in the order given. By default, all plugins in vendor/plugins are loaded in alphabetical order.
   # :all can be used as a placeholder for all plugins not explicitly named.
