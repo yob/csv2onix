@@ -1,0 +1,7 @@
+author: Stephen Touset
+summary: Manage gem versions in your Rails project
+homepage: http://www.touset.org/
+plugin: svn://devel.touset.org/plugins/gemtracker
+license: MIT
+version: 1.0
+rails_version: 1.2.0+

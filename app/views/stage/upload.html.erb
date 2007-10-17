@@ -1,0 +1,24 @@
+<div class="instructions">
+    <p>The conversion process begins by uploading a CSV file. A CSV file is plain text and contains information on 1 book per line. The most common way of creating them is to open the data in Microsoft Excel, then select "Save As" from the file menu. One of the available formats to save in is CSV.</p>
+    <p>The file may contain information on a maximum of 1000 titles.</p>
+</div>
+
+<div style="margin-left: auto; margin-right: auto; margin-top: 40px; margin-bottom: 100px; width: 450px; position: relative; ">
+  <form action="/stage/upload" method="post" enctype="multipart/form-data" class="f-wrap-1">
+
+    <h3>Select a File to Upload</h3>
+
+    <fieldset>
+      <label for="filename"><strong>CSV File:</strong>
+      <input id="filename" type="file" name="csvfile" class="f-input"/><br />
+      </label>
+
+    </fieldset>
+
+    <fieldset>
+      <div class="f-submit-wrap">
+        <input type="submit" name="Save" value="upload >>" class="f-submit" />
+      </div>
+    </fieldset>
+  </form>
+</div>
