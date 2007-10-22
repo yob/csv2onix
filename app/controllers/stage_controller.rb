@@ -47,7 +47,7 @@ class StageController < ApplicationController
       
       # attempt to load the file into memory and check its formatting
       begin
-        @data = load_data
+        @data = load_data(true)
         
         if @data.size > MAX_CSV_LINES
           flash.now[:error] = 'The CSV file must be no more than ' + MAX_CSV_LINES.to_s + ' lines long' and return
@@ -174,7 +174,7 @@ class StageController < ApplicationController
    
     # load the forms from the CSV file to present to the user for matching 
     # to ONIX equivalents
-    data = load_data 
+    data = load_data(true)
         
     @forms = []
         
@@ -239,7 +239,7 @@ class StageController < ApplicationController
     begin
       msg = RBook::Onix::Message.new
 
-      data = load_data 
+      data = load_data(true)
 
       msg.from_company = session[:from_company]
       msg.from_person = session[:from_person]
@@ -338,6 +338,8 @@ class StageController < ApplicationController
         msg.add_product(product)
       end
         
+      # TODO: fix this to make it more scalable. Maybe use a stream reader and write the data to a 
+      #       temp file, then use send_file
       send_data(msg.to_s, :disposition => 'attachment', :type => "text/xml", :filename => File.basename(session[:filename], '.csv')+'.xml')
     #rescue
     #  flash[:error] = "An error occured while processing your request: <br />" + $! 
@@ -348,12 +350,19 @@ class StageController < ApplicationController
 private
  
   # reads in the CSV file, sanitises it, the returns a 2D array.
-  def load_data
+  def load_data(full = false)
     return [] unless session[:filename]
     return [] unless File.exist?(session[:filename])
 
     # load the file into an array
-    data = FasterCSV.read(session[:filename])
+    data = []
+    
+    FasterCSV.foreach(session[:filename]) do |row|
+      data << row
+
+      # only display the first 100 records
+      break if data.size >= 100 && !full
+    end
       
     # remove the first line if necesary
     data.delete_at(0) if session[:ignore_first_line] && data.size > 0
