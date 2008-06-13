@@ -259,6 +259,8 @@ class StageController < ApplicationController
           
         product = RBook::Onix::Product.new
           
+        next if row[isbncol].nil?
+
         product.product_identifier = row[isbncol].gsub(/-/,'').strip
         product.title = row[titlecol].strip
         

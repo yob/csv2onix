@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
 
   layout 'default'
   
-  include ExceptionNotifiable
+  #include ExceptionNotifiable
 
 end
