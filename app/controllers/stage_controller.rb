@@ -1,7 +1,3 @@
-require 'fastercsv'
-require 'bigdecimal'
-require 'rbook/onix'
-require 'mime/types'
 
 class StageController < ApplicationController
 

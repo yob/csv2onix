@@ -5,7 +5,7 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '1.2.5' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -49,14 +49,25 @@ Rails::Initializer.run do |config|
   # like if you have constraints or database-specific column types
   # config.active_record.schema_format = :sql
 
-  # Activate observers that should always be running
-  # config.active_record.observers = :cacher, :garbage_collector
+  config.gem "onix", :version => "0.7.1"
 
-  # Make Active Record use UTC-base instead of local time
-  # config.active_record.default_timezone = :utc
-
-  # See Rails::Configuration for more options
-
-  # Application configuration should go into files in config/initializers
-  # -- all .rb files in that directory are automatically loaded
+  # FasterCSV is included in 1.9, but called CSV. Alias it to
+  # the FasterCSV constant so our app won't know the difference
+  #
+  # This shim borrowed from Gregory Brown
+  # http://ruport.blogspot.com/2008/03/fastercsv-api-shim-for-19.html
+  if RUBY_VERSION < "1.9"
+    config.gem "fastercsv",       :version => "1.5.0"
+  else
+    require "csv"
+    unless defined? FasterCSV
+      class Object
+        FCSV = FasterCSV = CSV
+        alias_method :FasterCSV, :CSV
+      end
+    end
+  end
 end
+
+require 'bigdecimal'
+require 'mime/types'

@@ -787,3 +787,28 @@ Processing StageController#upload (for 127.0.0.1 at 2007-10-18 01:22:20) [GET]
 Rendering template within layouts/default
 Rendering stage/upload
 Completed in 0.00697 (143 reqs/sec) | Rendering: 0.00179 (25%) | 200 OK [http://127.0.0.1/stage/upload]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2009-07-11 17:15:18) [GET]
+
+MissingSourceFile (no such file to load -- rbook/onix):
+  app/controllers/stage_controller.rb:3
+  thin (1.2.2) lib/thin/connection.rb:76:in `pre_process'
+  thin (1.2.2) lib/thin/connection.rb:74:in `catch'
+  thin (1.2.2) lib/thin/connection.rb:74:in `pre_process'
+  thin (1.2.2) lib/thin/connection.rb:57:in `process'
+  thin (1.2.2) lib/thin/connection.rb:42:in `receive_data'
+  eventmachine (0.12.8) lib/eventmachine.rb:242:in `run_machine'
+  eventmachine (0.12.8) lib/eventmachine.rb:242:in `run'
+  thin (1.2.2) lib/thin/backends/base.rb:57:in `start'
+  thin (1.2.2) lib/thin/server.rb:156:in `start'
+
+Rendered rescues/_trace (79.3ms)
+Rendered rescues/_request_and_response (4.0ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing StageController#index (for 127.0.0.1 at 2009-07-11 17:15:40) [GET]
+Rendering template within layouts/default
+Rendering stage/upload
+Completed in 22ms (View: 18 | 200 OK [http://127.0.0.1/]
