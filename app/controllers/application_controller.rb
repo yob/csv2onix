@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
 
   layout 'default'
-  
+
   include ExceptionNotifiable
 
 end
