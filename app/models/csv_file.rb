@@ -5,11 +5,11 @@ class CsvFile
   attr_reader :id
 
   attr_accessor :from_company, :from_person, :message_note, :publisher_name
-  attr_accessor :supplier_name, :currency_code
+  attr_accessor :supplier_name, :currency_code, :measurement_system
 
   attr_accessor :isbncol, :titlecol, :subtitlecol, :authorcol, :formcol
   attr_accessor :pricecol, :pubdatecol, :websitecol, :descriptioncol
-  attr_accessor :pagescol, :seriescol
+  attr_accessor :pagescol, :seriescol, :dimensionscol
 
   attr_accessor :formmap
 
@@ -96,6 +96,11 @@ class CsvFile
       next if counter == 1 && ignore_first_line
 
       product = ONIX::APAProduct.new
+
+      unless measurement_system.blank?
+        product.measurement_system = measurement_system.downcase.to_sym
+      end
+
       id = row[isbncol.to_i].to_s.gsub("-","").strip
       product.record_reference = id
 
@@ -183,6 +188,13 @@ class CsvFile
         product.number_of_pages = pages.to_i if pages
       end
 
+      unless dimensionscol.blank? || row[dimensionscol.to_i].blank?
+        height = row[dimensionscol.to_i].scan(/\d+/)[0].to_s.to_i
+        width  = row[dimensionscol.to_i].scan(/\d+/)[1].to_s.to_i
+        product.height = height if height > 0
+        product.width  = width  if width > 0
+      end
+
       unless seriescol.blank? || row[seriescol.to_i].blank?
         product.series = row[seriescol.to_i].strip
       end
@@ -240,6 +252,7 @@ class CsvFile
       :publisher_name => publisher_name,
       :supplier_name  => supplier_name,
       :currency_code  => currency_code,
+      :measurement_system => measurement_system,
       :isbncol        => isbncol,
       :titlecol       => titlecol,
       :subtitlecol    => subtitlecol,
@@ -251,6 +264,7 @@ class CsvFile
       :descriptioncol => descriptioncol,
       :pagescol       => pagescol,
       :seriescol      => seriescol,
+      :dimensionscol  => dimensionscol,
       :multiply_price => multiply_price,
       :round_price    => round_price,
       :ignore_first_line => ignore_first_line,
