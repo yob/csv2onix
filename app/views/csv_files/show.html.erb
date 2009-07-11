@@ -22,7 +22,9 @@
     <%= form.input :isbncol, :as => :select, :collection => @column_options, :label => "ISBN:" %>
     <%= form.input :titlecol, :as => :select, :collection => @column_options, :label => "Title:" %>
     <%= form.input :subtitlecol, :required => false , :as => :select, :collection => @column_options, :label => "Subtitle:"%>
-    <%= form.input :authorcol, :required => false, :as => :select, :collection => @column_options, :label => "Author:"%>
+    <%= form.input :author1col, :required => false, :as => :select, :collection => @column_options, :label => "Author 1:"%>
+    <%= form.input :author2col, :required => false, :as => :select, :collection => @column_options, :label => "Author 2:"%>
+    <%= form.input :author3col, :required => false, :as => :select, :collection => @column_options, :label => "Author 3:"%>
     <%= form.input :formcol, :required => false, :as => :select, :collection => @column_options, :label => "Format:" %>
     <%= form.input :pricecol, :required => false, :as => :select, :collection => @column_options, :label => "Price:" %>
     <%= form.input :pagescol, :required => false, :as => :select, :collection => @column_options, :label => "Pages:" %>

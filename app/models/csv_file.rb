@@ -7,9 +7,10 @@ class CsvFile
   attr_accessor :from_company, :from_person, :message_note, :publisher_name
   attr_accessor :supplier_name, :currency_code, :measurement_system
 
-  attr_accessor :isbncol, :titlecol, :subtitlecol, :authorcol, :formcol
+  attr_accessor :isbncol, :titlecol, :subtitlecol, :formcol
   attr_accessor :pricecol, :pubdatecol, :websitecol, :descriptioncol
   attr_accessor :pagescol, :seriescol, :dimensionscol, :weightcol
+  attr_accessor :author1col, :author2col, :author3col
 
   attr_accessor :formmap
 
@@ -120,11 +121,27 @@ class CsvFile
         product.subtitle = row[subtitlecol.to_i].strip
       end
 
-      unless authorcol.blank? || row[authorcol.to_i].blank?
+      unless author1col.blank? || row[author1col.to_i].blank?
         contributor = ONIX::Contributor.new
-        contributor.person_name_inverted = row[authorcol.to_i].strip
+        contributor.person_name_inverted = row[author1col.to_i].strip
         contributor.contributor_role = 'A01'
         contributor.sequence_number = '01'
+        product.product.contributors << contributor
+      end
+
+      unless author2col.blank? || row[author2col.to_i].blank?
+        contributor = ONIX::Contributor.new
+        contributor.person_name_inverted = row[author2col.to_i].strip
+        contributor.contributor_role = 'A01'
+        contributor.sequence_number = '02'
+        product.product.contributors << contributor
+      end
+
+      unless author3col.blank? || row[author3col.to_i].blank?
+        contributor = ONIX::Contributor.new
+        contributor.person_name_inverted = row[author3col.to_i].strip
+        contributor.contributor_role = 'A01'
+        contributor.sequence_number = '03'
         product.product.contributors << contributor
       end
 
@@ -261,7 +278,9 @@ class CsvFile
       :isbncol        => isbncol,
       :titlecol       => titlecol,
       :subtitlecol    => subtitlecol,
-      :authorcol      => authorcol,
+      :author1col     => author1col,
+      :author2col     => author2col,
+      :author3col     => author3col,
       :formcol        => formcol,
       :pricecol       => pricecol,
       :pubdatecol     => pubdatecol,
