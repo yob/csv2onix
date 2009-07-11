@@ -9,7 +9,7 @@ class CsvFile
 
   attr_accessor :isbncol, :titlecol, :subtitlecol, :authorcol, :formcol
   attr_accessor :pricecol, :pubdatecol, :websitecol, :descriptioncol
-  attr_accessor :pagescol, :seriescol, :dimensionscol
+  attr_accessor :pagescol, :seriescol, :dimensionscol, :weightcol
 
   attr_accessor :formmap
 
@@ -195,6 +195,11 @@ class CsvFile
         product.width  = width  if width > 0
       end
 
+      unless weightcol.blank? || row[weightcol.to_i].blank?
+        weight = row[weightcol.to_i].scan(/\d+/).first
+        product.weight = weight.to_i if weight
+      end
+
       unless seriescol.blank? || row[seriescol.to_i].blank?
         product.series = row[seriescol.to_i].strip
       end
@@ -265,6 +270,7 @@ class CsvFile
       :pagescol       => pagescol,
       :seriescol      => seriescol,
       :dimensionscol  => dimensionscol,
+      :weightcol      => weightcol,
       :multiply_price => multiply_price,
       :round_price    => round_price,
       :ignore_first_line => ignore_first_line,

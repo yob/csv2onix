@@ -31,6 +31,7 @@
     <%= form.input :dimensionscol, :required => false, :as => :select, :collection => @column_options, :label => "Dimensions:"%>
     <%= form.input :websitecol, :required => false, :as => :select, :collection => @column_options, :label => "Website:" %>
     <%= form.input :descriptioncol, :required => false, :as => :select, :collection => @column_options, :label => "Description:" %>
+    <%= form.input :weightcol, :required => false, :as => :select, :collection => @column_options, :label => "Weight:" %>
   <% end%>
 
   <% form.inputs :name => "Options" do %>
