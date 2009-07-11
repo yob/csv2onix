@@ -1,0 +1,11 @@
+<div class="instructions">
+  <p>Click the link below to download the complete ONIX file. If needed you can return to the first form and start the process again with a new file.</p>
+</div>
+<br>
+<br>
+<p id="download_link"><%= link_to image_tag('download.png'), csv_file_path(@csv_file, :format => :xml) %></p>
+<br>
+<br>
+<p id="download_link"><%= link_to image_tag('start_over.png'), '/' %></p>
+<br>
+<br>

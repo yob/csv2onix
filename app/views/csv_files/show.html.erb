@@ -1,0 +1,42 @@
+<div class="instructions">
+    <p>There is no agreed upon standard for storing bibliographic data in CSV files. To continue, I need to know what each column of data in the file contains. Please fill in the form below with as much information as possible.</p>
+    <p>All fields marked as required must be completed to continue.</p>
+</div>
+
+<% semantic_form_for :csv_file, @csv_file, :url => csv_file_path(@csv_file), :html => {:method => :put} do |form| %>
+  <input type="hidden" name="source" value="edit">
+
+  <% form.inputs :name => "Header" do %>
+    <p>The following fields are freeform text and are used at the to describe the content of the ONIX file.</p>
+    <%= form.input :from_company %>
+    <%= form.input :from_person %>
+    <%= form.input :message_note, :required => false %>
+    <%= form.input :publisher_name %>
+    <%= form.input :supplier_name %>
+  <% end%>
+
+  <% form.inputs :name => "Columns" do %>
+    <p>The following fields are used to indicate what type of data each column contains.</p>
+    <%= form.input :isbncol %>
+    <%= form.input :titlecol %>
+    <%= form.input :subtitlecol, :required => false %>
+    <%= form.input :authorcol, :required => false %>
+    <%= form.input :formcol, :required => false %>
+    <%= form.input :pricecol, :required => false %>
+    <%= form.input :pubdatecol, :required => false %>
+    <%= form.input :websitecol, :required => false %>
+    <%= form.input :descriptioncol, :required => false %>
+  <% end%>
+
+  <% form.inputs :name => "Options" do %>
+    <p>The following options can be used to configure how the data will be stored in the ONIX file.</p>
+
+    <%= form.input :multiply_price, :required => false, :hint => "Multiply all prices by this amount" %>
+    <%= form.input :round_price, :as => :boolean, :required => false, :hint => "Rounds all prices to the nearest 95x value. (eg: $19.96 to $20.44 will be rounded down to $19.95, $20.45 to $20.94 will be rounded up to $20.95" %>
+    <%= form.input :ignore_first_line, :as => :boolean, :required => false, :hint => "Some CSV files containing headings on the first line. Select this option to prevent the first line being interpreted as a book." %>
+  <% end%>
+
+  <%= form.buttons :commit %>
+<% end %>
+
+<%=array_as_table(@csv_file.first_100_rows)%>

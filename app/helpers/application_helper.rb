@@ -1,7 +1,7 @@
 # coding: utf-8
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-  
+
   def array_as_table(data)
     counter = 1
     output = '<table class="table1" style="width: 90%; margin-left: auto; margin-right: auto; ">'
@@ -19,7 +19,7 @@ module ApplicationHelper
       row.each do |cell|
         output += "<td>#{cell}</td>"
       end
-      
+
       output += "</tr>"
 
       counter += 1

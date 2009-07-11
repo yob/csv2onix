@@ -1,0 +1,45 @@
+/* -------------------------------------------------------------------------------------------------
+
+Load this stylesheet after formtastic.css in your layouts to override the CSS to suit your needs.
+This will allow you to update formtastic.css with new releases without clobbering your own changes.
+
+For example, to make the inline hint paragraphs a little darker in color than the standard #666:
+
+form.formtastic fieldset ol li p.inline-hints { color:#333; }
+
+--------------------------------------------------------------------------------------------------*/
+
+form.formtastic fieldset { clear: left; width: 55em; margin: 1.5em 0 0 0; padding: 0; border: 0; }
+form.formtastic legend { margin-left: 1em; color: #000; font-weight: bold; }
+form.formtastic fieldset ol { margin: 0; padding: 1em 1em 0 1em; list-style: none; position: relative;}
+form.formtastic fieldset li { float: left; clear: left; width: 100%; margin: 0; padding: 0 0 0.5em 0; list-style: none; position: relative;}
+
+form.formtastic fieldset.buttons { float: none; width: auto; border: none; padding-left: 12em; }
+
+form.formtastic fieldset label { position: relative; float: left; width: 10em; margin-right: 1em; padding-top: 4px; }
+
+form.formtastic label strong { position: absolute; left: 30em; top: 0.2em; width: 25em; color: #c00; font-size: 85%; font-weight: normal; text-transform: uppercase; padding-top: 4px; }
+
+/* Nested Fieldsets */
+form.formtastic fieldset fieldset { margin: 0; border: 0; }
+form.formtastic fieldset fieldset legend { margin-left: 0; padding-left: 0; font-weight: normal; }
+form.formtastic fieldset fieldset ol { position: relative; top: -1em; margin: -0.2em 0 0 11em; padding: 0; }
+form.formtastic fieldset fieldset label { float: none; width: auto; margin-right: auto; padding-top: 0; }
+form.formtastic fieldset fieldset .checkbox { margin-left: 0; } 
+
+/* finders */
+form.formtastic .finder .text { background: #fff url(../images/finder.gif) no-repeat scroll left top; text-indent: 3px; }
+form.formtastic .finder .results { background-color: #fff; margin: 0; padding: 0; z-index: 1000; position: absolute; top: 10px; }
+form.formtastic .finder .results ul { list-style-type: none; margin: 0; padding: 0; border: 1px solid #999; }
+form.formtastic .finder .results ul li { cursor: pointer; display: block; margin: 0; padding: 2px; border-bottom: 1px solid #999; }
+form.formtastic .finder .results ul li.new { font-style: italic; color: #333; }
+form.formtastic .finder .results ul li:hover,
+form.formtastic .finder .results ul li.selected { background-color: #ccc; font-weight: bold; }
+form.formtastic .finder .results ul li .secondary { font-size: 85%; } 
+
+form.formtastic span.read-only { line-height: 1.6; display: block; margin-left: 11em;}
+
+/* errors */
+form.formtastic p.inline-errors {color: red; width: 70%; margin-left: 11em;}
+
+abbr[title="required"] { color: red;}

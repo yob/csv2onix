@@ -15,15 +15,10 @@ Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here
 
   # Skip frameworks you're not going to use (only works if using vendor/rails)
-  # ActiveRecord is required in testing, as it loads fixture testing code
-  if ENV["RAILS_ENV"] == "test"
-    config.frameworks -= [ :active_resource]
-  else
-    config.frameworks -= [ :active_resource, :active_record ]
-  end
+  config.frameworks -= [ :active_resource, :active_record ]
 
   # Add additional load paths for your own custom dirs
-  # config.load_paths += %W( #{RAILS_ROOT}/extras )
+  config.load_paths += %W( #{RAILS_ROOT}/models )
 
   # Your secret key for verifying cookie session data integrity.
   # If you change this key, all old sessions will become invalid!
@@ -33,7 +28,11 @@ Rails::Initializer.run do |config|
   }
 
   config.gem "jeremyevans-exception_notification", :version => "1.0.20090610", :lib => "exception_notifier"
-  config.gem "onix", :version => "0.7.1"
+  config.gem "onix",  :version => "0.7.1"
+  config.gem "ean13", :version => "1.3"
+  config.gem "upc",   :version => "1.0"
+  config.gem "chronic", :version => "0.2.3"
+  config.gem "justinfrench-formtastic", :version => "0.2.1", :lib => "formtastic"
 
   # FasterCSV is included in 1.9, but called CSV. Alias it to
   # the FasterCSV constant so our app won't know the difference
@@ -54,4 +53,6 @@ Rails::Initializer.run do |config|
 end
 
 require 'bigdecimal'
+require 'fileutils'
 require 'mime/types'
+require 'yaml'
