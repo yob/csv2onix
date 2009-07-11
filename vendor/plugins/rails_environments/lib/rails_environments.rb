@@ -1,3 +1,4 @@
+# coding: utf-8
 module Rails
   def self.environment
     ENV['RAILS_ENV'].to_s.downcase
