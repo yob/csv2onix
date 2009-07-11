@@ -30,6 +30,13 @@ class CsvFilesController < ApplicationController
     @column_options = (1..@csv_file.col_count).map do |num|
       [num, num - 1]
     end
+    @currencies = [
+      ["Australian Dollar", "AUD"],
+      ["Euro", "EUR"],
+      ["Pound Sterling", "GBP"],
+      ["Singapore Dollar", "SGD"],
+      ["US Dollar","USD"]
+    ]
 
     if @csv_file.nil?
       flash[:error] = "No matching CSV file found"

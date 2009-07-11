@@ -13,6 +13,7 @@
     <%= form.input :message_note, :required => false %>
     <%= form.input :publisher_name %>
     <%= form.input :supplier_name %>
+    <%= form.input :currency_code, :label => "Currency:", :as => :select, :collection => @currencies, :include_blank => false %>
   <% end%>
 
   <% form.inputs :name => "Columns" do %>

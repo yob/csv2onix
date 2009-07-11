@@ -5,7 +5,7 @@ class CsvFile
   attr_reader :id
 
   attr_accessor :from_company, :from_person, :message_note, :publisher_name
-  attr_accessor :supplier_name
+  attr_accessor :supplier_name, :currency_code
 
   attr_accessor :isbncol, :titlecol, :subtitlecol, :authorcol, :formcol
   attr_accessor :pricecol, :pubdatecol, :websitecol, :descriptioncol
@@ -78,7 +78,7 @@ class CsvFile
       #header.to_person    = to_person    unless to_person.blank?
       #header.to_company   = to_company   unless to_company.blank?
       header.sent_date    = Time.now
-      #header.default_currency_code = "AUD"
+      header.default_currency_code = currency_code unless currency_code.blank?
 
       ONIX::Writer.open(output, header) do |writer|
         self.each_onix_product do |product|
@@ -239,6 +239,7 @@ class CsvFile
       :message_note   => message_note,
       :publisher_name => publisher_name,
       :supplier_name  => supplier_name,
+      :currency_code  => currency_code,
       :isbncol        => isbncol,
       :titlecol       => titlecol,
       :subtitlecol    => subtitlecol,
