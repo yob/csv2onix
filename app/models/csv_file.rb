@@ -9,7 +9,7 @@ class CsvFile
 
   attr_accessor :isbncol, :titlecol, :subtitlecol, :authorcol, :formcol
   attr_accessor :pricecol, :pubdatecol, :websitecol, :descriptioncol
-  attr_accessor :pagescol
+  attr_accessor :pagescol, :seriescol
 
   attr_accessor :formmap
 
@@ -183,6 +183,10 @@ class CsvFile
         product.number_of_pages = pages.to_i if pages
       end
 
+      unless seriescol.blank? || row[seriescol.to_i].blank?
+        product.series = row[seriescol.to_i].strip
+      end
+
       yield product
     end
   end
@@ -245,6 +249,7 @@ class CsvFile
       :websitecol     => websitecol,
       :descriptioncol => descriptioncol,
       :pagescol       => pagescol,
+      :seriescol      => seriescol,
       :multiply_price => multiply_price,
       :round_price    => round_price,
       :ignore_first_line => ignore_first_line,
