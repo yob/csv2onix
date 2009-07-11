@@ -27,6 +27,9 @@ class CsvFilesController < ApplicationController
 
   def show
     @csv_file = CsvFile.find(params[:id])
+    @column_options = (1..@csv_file.col_count).map do |num|
+      [num, num - 1]
+    end
 
     if @csv_file.nil?
       flash[:error] = "No matching CSV file found"

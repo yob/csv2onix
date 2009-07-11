@@ -95,7 +95,7 @@ class CsvFile
       next if counter == 1 && ignore_first_line
 
       product = ONIX::APAProduct.new
-      id = row[isbncol.to_i  - 1].to_s.gsub("-","").strip
+      id = row[isbncol.to_i].to_s.gsub("-","").strip
       product.record_reference = id
 
       if EAN13.valid?(id)
@@ -108,33 +108,33 @@ class CsvFile
         product.proprietary_id = id
       end
 
-      product.title = row[titlecol.to_i - 1].to_s.strip
+      product.title = row[titlecol.to_i].to_s.strip
 
-      unless subtitlecol.blank? || row[subtitlecol.to_i - 1].blank?
-        product.subtitle = row[subtitlecol.to_i - 1].strip
+      unless subtitlecol.blank? || row[subtitlecol.to_i].blank?
+        product.subtitle = row[subtitlecol.to_i].strip
       end
 
-      unless authorcol.blank? || row[authorcol.to_i - 1].blank?
+      unless authorcol.blank? || row[authorcol.to_i].blank?
         contributor = ONIX::Contributor.new
-        contributor.person_name_inverted = row[authorcol.to_i - 1].strip
+        contributor.person_name_inverted = row[authorcol.to_i].strip
         contributor.contributor_role = 'A01'
         contributor.sequence_number = '01'
         product.product.contributors << contributor
       end
 
-      if formcol.blank? || row[formcol.to_i - 1].blank?
+      if formcol.blank? || row[formcol.to_i].blank?
         product.product_form = '00'
       else
-        code = formmap[row[formcol.to_i - 1]]
+        code = formmap[row[formcol.to_i]]
         if code.blank?
           product.product_form = '00'
         else
-          product.product_form = formmap[row[formcol.to_i - 1]]
+          product.product_form = formmap[row[formcol.to_i]]
         end
       end
 
-      unless descriptioncol.blank? || row[descriptioncol.to_i - 1].blank?
-        product.main_description = row[descriptioncol.to_i - 1].strip
+      unless descriptioncol.blank? || row[descriptioncol.to_i].blank?
+        product.main_description = row[descriptioncol.to_i].strip
       end
 
       product.publisher = self.publisher_name
@@ -144,8 +144,8 @@ class CsvFile
       product.product_availability = 99
       product.publishing_status = 9 # Unknown
 
-      unless pricecol.blank? || row[pricecol.to_i - 1].blank?
-        price = row[pricecol.to_i - 1].to_s.gsub(/[^\d\.]/,"")
+      unless pricecol.blank? || row[pricecol.to_i].blank?
+        price = row[pricecol.to_i].to_s.gsub(/[^\d\.]/,"")
         price = BigDecimal.new(price)
 
         unless multiply_price.blank?
@@ -165,16 +165,16 @@ class CsvFile
         product.rrp_inc_sales_tax = price
       end
 
-      unless pubdatecol.blank? || row[pubdatecol.to_i - 1].blank?
+      unless pubdatecol.blank? || row[pubdatecol.to_i].blank?
         begin
-          product.publication_date = Chronic.parse(row[pubdatecol.to_i -1].strip)
+          product.publication_date = Chronic.parse(row[pubdatecol.to_i].strip)
         rescue
           # do nothing
         end
       end
 
-      unless websitecol.blank? || row[websitecol.to_i - 1].blank?
-        product.supplier_website = row[websitecol.to_i - 1].strip
+      unless websitecol.blank? || row[websitecol.to_i].blank?
+        product.supplier_website = row[websitecol.to_i].strip
       end
 
       yield product
@@ -203,7 +203,7 @@ class CsvFile
       counter += 1
       next if counter == 1 && ignore_first_line
 
-      forms << row[formcol.to_i - 1]
+      forms << row[formcol.to_i]
     end
 
     forms.uniq!
