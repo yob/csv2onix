@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class CsvFile
 
   TEMPDIR = RAILS_ROOT + "/tmp/files/"
