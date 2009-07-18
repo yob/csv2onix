@@ -27,6 +27,7 @@ Rails::Initializer.run do |config|
     :secret      => '02f14b66e95659064a2c91cfc95827fc'
   }
 
+  config.gem "mime-types", :version => "1.16", :lib => "mime/types"
   config.gem "jeremyevans-exception_notification", :version => "1.0.20090610", :lib => "exception_notifier"
   config.gem "onix",  :version => "0.7.1"
   config.gem "ean13", :version => "1.3"
@@ -54,5 +55,4 @@ end
 
 require 'bigdecimal'
 require 'fileutils'
-require 'mime/types'
 require 'yaml'
