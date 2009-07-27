@@ -22,6 +22,7 @@ class CsvFile
 
     def create(path)
       raise "#{path} does not exist" unless File.file?(path)
+      raise "file is not a utf8 encoded file" unless `isutf8 #{path} 2>&1`.strip == ""
 
       @id = CsvFile.get_id
       FileUtils.cp(path, CsvFile::TEMPDIR + "#{@id}.dat")
