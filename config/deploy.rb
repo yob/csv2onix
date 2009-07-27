@@ -26,12 +26,15 @@ role :db,  domain, :primary => true
 # setup symlinks to the sphinx index dir and artifacts
 task :create_symlinks, :roles => [:app] do
   run "ln -s #{shared_path}/cache #{release_path}/tmp/cache"
+  run "ln -s #{shared_path}/sockets #{release_path}/tmp/sockets"
+  run "ln -s #{shared_path}/sessions #{release_path}/tmp/sessions"
+  run "ln -s #{shared_path}/files #{release_path}/tmp/files"
 end
 after 'deploy:update_code', :create_symlinks
 
 # check file permissions are correct
 task :check_permissions, :roles => [:app] do
-  #run "chown -R jh:www-data #{release_path}"
+  run "chown -R jh:www-data #{release_path}"
   run "chmod -R ug+rwx #{release_path}"
 end
 after 'create_symlinks', :check_permissions
