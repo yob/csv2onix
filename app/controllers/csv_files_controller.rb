@@ -17,7 +17,8 @@ class CsvFilesController < ApplicationController
     end
 
     begin
-      csvfile = ::CsvFile.create(params[:csvfile].path)
+      basename = File.basename(params[:csvfile].original_filename)
+      csvfile = ::CsvFile.create(params[:csvfile].path, basename)
       redirect_to csv_file_path(csvfile)
     rescue Exception => e
       flash[:error] = e.message
@@ -52,7 +53,7 @@ class CsvFilesController < ApplicationController
       format.html
       format.xml do
         @csv_file.generate_onix
-        send_file(@csv_file.onix_filename, :filename => "#{@csv_file.id}.xml",
+        send_file(@csv_file.onix_filename, :filename => @csv_file.download_filename,
                                            :type     => "text/xml",
                                            :disposition => 'attachment')
       end

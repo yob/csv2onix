@@ -6,6 +6,8 @@ class CsvFile
 
   attr_reader :id
 
+  attr_accessor :original_filename
+
   attr_accessor :from_company, :from_person, :message_note, :publisher_name
   attr_accessor :supplier_name, :currency_code, :measurement_system
 
@@ -21,13 +23,13 @@ class CsvFile
 
   class << self
 
-    def create(path)
+    def create(path, original_filename)
       raise "#{path} does not exist" unless File.file?(path)
       raise "file is not a utf8 encoded file" unless `isutf8 #{path} 2>&1`.strip == ""
 
       @id = CsvFile.get_id
       FileUtils.cp(path, CsvFile::TEMPDIR + "#{@id}.dat")
-      CsvFile.new(@id)
+      CsvFile.new(@id, original_filename)
     end
 
     def find(id)
@@ -53,10 +55,12 @@ class CsvFile
     end
   end
 
-  def initialize(id)
+  def initialize(id, original_filename = nil)
     @id = id.to_i
+    @original_filename = original_filename
 
     load_attributes
+    save
   end
 
   def to_param
@@ -73,6 +77,14 @@ class CsvFile
 
   def onix_filename
     "#{CsvFile::TEMPDIR}#{id}.xml"
+  end
+
+  def download_filename
+    if self.original_filename.blank?
+      "#{self.id}.xml"
+    else
+      "#{original_filename_no_extension}.xml"
+    end
   end
 
   def generate_onix
@@ -276,6 +288,7 @@ class CsvFile
 
   def save
     params = {
+      :original_filename => original_filename,
       :from_company   => from_company,
       :from_person    => from_person,
       :message_note   => message_note,
@@ -320,6 +333,17 @@ class CsvFile
   end
 
   private
+
+  def original_filename_no_extension
+    return nil if self.original_filename.blank?
+
+    if self.original_filename.include?(".")
+      m, start, finish = *self.original_filename.match(/(.+)\.(.+?)/)
+      start
+    else
+      self.original_filename
+    end
+  end
 
   def load_attributes
     return false unless File.file?(attribute_filename)
