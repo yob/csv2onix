@@ -13,6 +13,7 @@ class CsvFile
   attr_accessor :pricecol, :pubdatecol, :websitecol, :descriptioncol
   attr_accessor :pagescol, :seriescol, :dimensionscol, :weightcol
   attr_accessor :author1col, :author2col, :author3col
+  attr_accessor :cartonqtycol
 
   attr_accessor :formmap
 
@@ -224,6 +225,10 @@ class CsvFile
         product.series = row[seriescol.to_i].strip
       end
 
+      unless cartonqtycol.blank? || row[cartonqtycol.to_i].blank?
+        product.pack_quantity = row[cartonqtycol.to_i]
+      end
+
       yield product
     end
   end
@@ -293,6 +298,7 @@ class CsvFile
       :seriescol      => seriescol,
       :dimensionscol  => dimensionscol,
       :weightcol      => weightcol,
+      :cartonqtycol   => cartonqtycol,
       :multiply_price => multiply_price,
       :round_price    => round_price,
       :ignore_first_line => ignore_first_line,
