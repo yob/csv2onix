@@ -33,7 +33,7 @@ Rails::Initializer.run do |config|
   config.gem "ean13", :version => "1.3"
   config.gem "upc",   :version => "1.0"
   config.gem "chronic", :version => "0.2.3"
-  config.gem "justinfrench-formtastic", :version => "0.2.1", :lib => "formtastic"
+  config.gem "formtastic", :version => "0.9.1"
 
   # FasterCSV is included in 1.9, but called CSV. Alias it to
   # the FasterCSV constant so our app won't know the difference
