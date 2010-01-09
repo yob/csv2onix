@@ -29,7 +29,7 @@ Rails::Initializer.run do |config|
 
   config.gem "mime-types", :version => "1.16", :lib => "mime/types"
   config.gem "jeremyevans-exception_notification", :version => "1.0.20100106", :lib => "exception_notifier"
-  config.gem "onix",  :version => "0.7.8"
+  config.gem "onix",  :version => "0.8.1"
   config.gem "ean13", :version => "1.4"
   config.gem "upc",   :version => "1.0"
   config.gem "chronic", :version => "0.2.3"
