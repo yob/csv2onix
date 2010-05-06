@@ -41,7 +41,7 @@ Rails::Initializer.run do |config|
   # This shim borrowed from Gregory Brown
   # http://ruport.blogspot.com/2008/03/fastercsv-api-shim-for-19.html
   if RUBY_VERSION < "1.9"
-    config.gem "fastercsv",       :version => "1.5.0"
+    config.gem "fastercsv",       :version => "1.5.3"
   else
     require "csv"
     unless defined? FasterCSV
