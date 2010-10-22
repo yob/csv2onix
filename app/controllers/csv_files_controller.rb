@@ -62,9 +62,9 @@ class CsvFilesController < ApplicationController
 
   def formmap
     @csv_file = CsvFile.find(params[:id])
-    @onixforms = ONIX::Lists::PRODUCT_FORM.map do |code, human|
+    @onixforms = ONIX::Lists::PRODUCT_FORM.map { |code, human|
       [human, code]
-    end.sort_by { |arr| arr[1]}
+    }.sort_by { |arr| arr[0].to_s}
 
     if @csv_file.nil?
       flash[:error] = "No matching CSV file found"
