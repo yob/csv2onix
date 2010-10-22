@@ -1,5 +1,7 @@
 # Capistrano Deploy Recipes
 
+require "bundler/capistrano"
+
 default_run_options[:pty] = true
 
 set :application, "csv2onix"
