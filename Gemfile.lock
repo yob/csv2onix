@@ -39,7 +39,6 @@ GEM
     erubis (2.6.6)
       abstract (>= 1.0.0)
     eventmachine (0.12.10)
-    fastercsv (1.5.3)
     formtastic (1.2.3)
       actionpack (>= 2.3.7)
       activesupport (>= 2.3.7)
@@ -98,7 +97,6 @@ PLATFORMS
 DEPENDENCIES
   chronic (= 0.2.3)
   ean13 (= 1.4)
-  fastercsv (= 1.5.3)
   formtastic
   mime-types (= 1.16)
   onix (= 0.8.5)
