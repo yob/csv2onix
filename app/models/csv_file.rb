@@ -108,7 +108,7 @@ class CsvFile
 
   def each_onix_product(&block)
     counter = 0
-    FasterCSV.foreach(input_filename) do |row|
+    CSV.foreach(input_filename) do |row|
       counter += 1
       next if counter == 1 && ignore_first_line
 
@@ -248,7 +248,7 @@ class CsvFile
   def first_100_rows
     rows = []
 
-    FasterCSV.foreach(input_filename) do |row|
+    CSV.foreach(input_filename) do |row|
       rows << row
 
       # only display the first 100 records
@@ -263,7 +263,7 @@ class CsvFile
     return forms if formcol.blank?
 
     counter = 0
-    FasterCSV.foreach(input_filename) do |row|
+    CSV.foreach(input_filename) do |row|
       counter += 1
       next if counter == 1 && ignore_first_line
 
@@ -277,7 +277,7 @@ class CsvFile
   end
 
   def col_count
-    FasterCSV.foreach(input_filename) do |row|
+    CSV.foreach(input_filename) do |row|
       return row.size
     end
   end

@@ -4,9 +4,7 @@ class ApplicationController < ActionController::Base
 
   layout 'default'
 
-  include ExceptionNotifiable
-
-  rescue_from FasterCSV::MalformedCSVError, :with => :csv_error
+  rescue_from CSV::MalformedCSVError, :with => :csv_error
 
   # method for handling a malformed CSV file
   def csv_error
