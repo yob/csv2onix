@@ -3,7 +3,7 @@
     <p>All fields marked as required must be completed to continue.</p>
 </div>
 
-<% semantic_form_for :csv_file, @csv_file, :url => csv_file_path(@csv_file), :html => {:method => :put} do |form| %>
+<% semantic_form_for @csv_file, :as => :csv_file, :url => csv_file_path(@csv_file), :html => {:method => :put} do |form| %>
   <input type="hidden" name="source" value="edit">
 
   <% form.inputs :name => "Header" do %>

@@ -27,6 +27,6 @@ module ApplicationHelper
 
     output += "</table>"
 
-    output
+    output.html_safe
   end
 end

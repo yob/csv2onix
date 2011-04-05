@@ -55,6 +55,10 @@ class CsvFile
     def human_name
       "CSV File"
     end
+
+    def model_name
+      :csv_file
+    end
   end
 
   def initialize(id, original_filename = nil)
