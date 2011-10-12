@@ -3,8 +3,6 @@ source "http://gems.github.com"
 
 gem "rails", "3.0.5"
 
-gem "thin"
-
 gem "mime-types", "1.16", :require => "mime/types"
 gem "onix",       "0.8.5"
 gem "ean13",      "1.4"
