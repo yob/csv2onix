@@ -27,6 +27,4 @@ end
 after_fork do |server, worker|
   worker_pid = "/srv/csv2onix.rainbowbooks.com.au/current/tmp/pids/unicorn.#{worker.nr}.pid"
   system("echo #{Process.pid} > #{worker_pid}")
-
-  ActiveRecord::Base.establish_connection
 end
