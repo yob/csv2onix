@@ -1,5 +1,4 @@
 source :gemcutter
-source "http://gems.github.com"
 
 gem "rails", "3.0.5"
 
@@ -9,6 +8,7 @@ gem "ean13",      "1.4"
 gem "upc",        "1.0"
 gem "chronic",    "0.2.3"
 gem "formtastic"
+gem "unicorn"
 
 group :development, :test do
   # gem "rspec"
