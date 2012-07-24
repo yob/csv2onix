@@ -5,12 +5,10 @@ require 'csv'
 class CsvFilesController < ApplicationController
 
   def index
-    new
-    render :action => "new"
+    redirect_to new_csv_file_path
   end
 
   def new
-    #reset_session
   end
 
   def create
