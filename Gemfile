@@ -1,6 +1,6 @@
 source :gemcutter
 
-gem "rails", "~>3.1.0"
+gem "rails", "~>3.2.0"
 
 gem "mime-types", "1.16", :require => "mime/types"
 gem "onix",       "0.8.5"
