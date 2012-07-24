@@ -4,7 +4,7 @@ require 'csv'
 
 class CsvFile
 
-  TEMPDIR = RAILS_ROOT + "/tmp/files/"
+  TEMPDIR = Rails.root.join("tmp","files")
 
   attr_reader :id
 
@@ -30,13 +30,13 @@ class CsvFile
       raise "file is not a utf8 encoded file" unless `isutf8 #{path} 2>&1`.strip == ""
 
       @id = CsvFile.get_id
-      FileUtils.cp(path, CsvFile::TEMPDIR + "#{@id}.dat")
+      FileUtils.cp(path, CsvFile::TEMPDIR.join("#{@id}.dat"))
       CsvFile.new(@id, original_filename)
     end
 
     def find(id)
       return nil if id.nil?
-      return nil unless File.file?("#{CsvFile::TEMPDIR}#{id}.dat")
+      return nil unless File.file?(CsvFile::TEMPDIR.join("#{id}.dat"))
 
       return CsvFile.new(id)
     end
@@ -46,7 +46,7 @@ class CsvFile
       FileUtils.mkdir_p(CsvFile::TEMPDIR)
 
       id = rand(1000000)
-      while File.file?("#{CsvFile::TEMPDIR}#{id}.dat")
+      while File.file?(CsvFile::TEMPDIR.join("#{id}.dat"))
         id = rand(1000000)
       end
       return id
@@ -74,15 +74,15 @@ class CsvFile
   end
 
   def attribute_filename
-    "#{CsvFile::TEMPDIR}#{id}.att"
+    CsvFile::TEMPDIR.join("#{id}.att")
   end
 
   def input_filename
-    "#{CsvFile::TEMPDIR}#{id}.dat"
+    CsvFile::TEMPDIR.join("#{id}.dat")
   end
 
   def onix_filename
-    "#{CsvFile::TEMPDIR}#{id}.xml"
+    CsvFile::TEMPDIR.join("#{id}.xml")
   end
 
   def download_filename

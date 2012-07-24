@@ -1,15 +1,13 @@
 # coding: utf-8
-ActionController::Routing::Routes.draw do |map|
 
-  map.resources :csv_files, :member => {:formmap => :get, :ready => :get}
+CsvToOnix::Application.routes.draw do
 
-  # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  # map.root :controller => "welcome"
-  map.root :controller => "csv_files"
+  resources :csv_files do
+    member do
+      get :formmap
+      get :ready
+    end
+  end
 
-  # See how all your routes lay out with "rake routes"
-
-  # Install the default routes as the lowest priority.
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  root to: "csv_files#index"
 end

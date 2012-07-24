@@ -2,10 +2,10 @@
   <p>Different suppliers list each titles binding in a different format. This step is used to match each binding found in the file with a standard format.</p>
 </div>
 
-<% semantic_form_for :csv_file, @csv_file, :url => csv_file_path(@csv_file), :html => {:method => :put} do |form| %>
+<%= semantic_form_for @csv_file, :as => :csv_file, :url => csv_file_path(@csv_file), :html => {:method => :put} do |form| %>
   <input type="hidden" name="source" value="formmap">
 
-  <% form.inputs :name => "Formats" do %>
+  <%= form.inputs :name => "Formats" do %>
     <% @csv_file.forms.each do |format|%>
       <li>
         <label><%=format%></label>
