@@ -1,5 +1,7 @@
 # coding: utf-8
 
+require 'csv'
+
 class ApplicationController < ActionController::Base
 
   layout 'default'
