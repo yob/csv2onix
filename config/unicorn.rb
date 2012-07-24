@@ -6,7 +6,7 @@ working_directory "."
 preload_app true
 timeout 180
 
-listen '/srv/csv2onxi.rainbowbooks.com.au/current/tmp/sockets/unicorn.sock', :backlog => 128
+listen '/srv/csv2onix.rainbowbooks.com.au/current/tmp/sockets/unicorn.sock', :backlog => 128
 pid '/srv/csv2onix.rainbowbooks.com.au/current/tmp/pids/unicorn.pid'
 stderr_path "/srv/csv2onix.rainbowbooks.com.au/current/log/unicorn.stderr.log"
 stdout_path "/srv/csv2onix.rainbowbooks.com.au/current/log/unicorn.stdout.log"
