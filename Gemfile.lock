@@ -43,6 +43,8 @@ GEM
     hoe (2.8.0)
       rake (>= 0.8.7)
     i18n (0.5.0)
+    isbn10 (1.2.0)
+      ean13
     kgio (2.7.4)
     mail (2.2.15)
       activesupport (>= 2.3.6)
@@ -97,6 +99,7 @@ DEPENDENCIES
   chronic (= 0.2.3)
   ean13 (= 1.4)
   formtastic
+  isbn10 (= 1.2)
   mime-types (= 1.16)
   onix (= 0.8.5)
   rails (= 3.0.5)

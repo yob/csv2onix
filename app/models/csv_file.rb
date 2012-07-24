@@ -124,7 +124,8 @@ class CsvFile
         product.measurement_system = measurement_system.downcase.to_sym
       end
 
-      id = row[isbncol.to_i].to_s.gsub("-","").strip
+      id = row[isbncol.to_i].to_s.gsub(/[^\dxX]/,"").strip
+      id = ISBN10.new(id).to_ean if ISBN10.valid?(id)
       product.record_reference = id
 
       if EAN13.valid?(id)
