@@ -8,7 +8,7 @@ gem "ean13",      "1.4"
 gem "isbn10",     "1.2"
 gem "upc",        "1.0"
 gem "chronic",    "0.2.3"
-gem "formtastic"
+gem "formtastic", "~>1.0"
 gem "unicorn"
 
 group :development, :test do
