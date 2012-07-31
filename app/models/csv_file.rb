@@ -21,7 +21,7 @@ class CsvFile
 
   attr_accessor :formmap
 
-  attr_accessor :multiply_price, :round_price, :ignore_first_line
+  attr_accessor :ignore_first_line
 
   class << self
 
@@ -194,20 +194,6 @@ class CsvFile
         price = row[pricecol.to_i].to_s.gsub(/[^\d\.]/,"")
         price = BigDecimal.new(price)
 
-        unless multiply_price.blank?
-          price = price * BigDecimal.new(multiply_price)
-        end
-
-        if round_price && price > 0
-          if price.frac > BigDecimal.new("0.95") && price.frac <= BigDecimal.new("0.99")
-            price = price.truncate + BigDecimal.new("0.95")
-          elsif price.frac >= BigDecimal.new("0.0") && price.frac <= BigDecimal.new("0.45")
-            price = (price.truncate - 1) + BigDecimal.new("0.95")
-          elsif price.frac >= BigDecimal.new("0.46") && price.frac <= BigDecimal.new("0.94")
-            price = price.truncate + BigDecimal.new("0.95")
-          end
-        end
-
         product.rrp_inc_sales_tax = price
       end
 
@@ -319,8 +305,6 @@ class CsvFile
       :dimensionscol  => dimensionscol,
       :weightcol      => weightcol,
       :cartonqtycol   => cartonqtycol,
-      :multiply_price => multiply_price,
-      :round_price    => round_price,
       :ignore_first_line => ignore_first_line,
       :formmap        => formmap
     }
@@ -364,12 +348,6 @@ class CsvFile
   end
 
   def sanitise_attributes
-    if self.round_price.nil? || self.round_price == false || self.round_price == "0"
-      self.round_price = false
-    else
-      self.round_price = true
-    end
-
     if self.ignore_first_line.nil? || self.ignore_first_line == false || self.ignore_first_line == "0"
       self.ignore_first_line = false
     else

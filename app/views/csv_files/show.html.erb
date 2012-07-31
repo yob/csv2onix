@@ -39,9 +39,6 @@
 
   <%= form.inputs :name => "Options" do %>
     <p>The following options can be used to configure how the data will be stored in the ONIX file.</p>
-
-    <%= form.input :multiply_price, :required => false, :hint => "Multiply all prices by this amount" %>
-    <%= form.input :round_price, :as => :boolean, :required => false, :hint => "Rounds all prices to the nearest 95x value. (eg: $19.96 to $20.44 will be rounded down to $19.95, $20.45 to $20.94 will be rounded up to $20.95" %>
     <%= form.input :ignore_first_line, :as => :boolean, :required => false, :hint => "Some CSV files containing headings on the first line. Select this option to prevent the first line being interpreted as a book." %>
   <% end%>
 
