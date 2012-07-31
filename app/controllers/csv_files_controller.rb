@@ -22,7 +22,7 @@ class CsvFilesController < ApplicationController
       redirect_to csv_file_path(csvfile)
     rescue Exception => e
       flash[:error] = e.message
-      redirect_to "/"
+      redirect_to new_csv_file_path
     end
   end
 
